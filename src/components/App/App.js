@@ -1,4 +1,5 @@
 import React from 'react';
+import Form from '../Form/Form';
 
 //const PositiveMessage = () => <p>You are allowed to watch the movie.</p>
 
@@ -52,15 +53,12 @@ class App extends React.Component {
     return (
       <div>
         <h1>Buy the ticket!</h1>
-        <form onSubmit={this.handleFormSubmit}>
-          <input type='checkbox' id='age' 
-                 onChange={this.handleCheckboxChange} 
-                 checked={isConfirmed} />
-          <label htmlFor='age'>I am 18 years old</label>
-          <br/>
-          <button type='submit'>Buy</button>
-          {this.displayMessage()} 
-        </form>    
+        <Form 
+        change={this.handleCheckboxChange} 
+        submit={this.handleFormSubmit} 
+        checked={this.isConfirmed}
+        />
+        {this.displayMessage()} 
       </div>
     )
   }
