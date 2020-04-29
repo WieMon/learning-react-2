@@ -1,8 +1,16 @@
 import React from 'react';
 
-const PositiveMessage = () => <p>You are allowed to watch the movie.</p>
+//const PositiveMessage = () => <p>You are allowed to watch the movie.</p>
 
-const NegativeMessage = () => <p>You are not allowed to watch the movie.</p>
+//const NegativeMessage = () => <p>You are not allowed to watch the movie.</p>
+
+const ValidationMessage = (props) => {
+  const {txt} = props
+
+  return(
+    <p>{txt}</p>
+  )
+}
 
 class App extends React.Component {
 
@@ -30,22 +38,24 @@ class App extends React.Component {
   displayMessage = () => {
     if(this.state.isFormSubmitted){
       if(this.state.isConfirmed) {
-        return <PositiveMessage />
+        return <ValidationMessage txt='You are allowed to watch the movie.'/>
       } else {
-        return <NegativeMessage />
+        return <ValidationMessage txt='You are not allowed to watch the movie.'/>
       }
     } else {return null}
   }
 
   render() {
-    console.log(this.state.isConfirmed);
+    const {isConfirmed} = this.state
+    console.log(isConfirmed);
+
     return (
       <div>
         <h1>Buy the ticket!</h1>
         <form onSubmit={this.handleFormSubmit}>
           <input type='checkbox' id='age' 
                  onChange={this.handleCheckboxChange} 
-                 checked={this.state.isConfirmed} />
+                 checked={isConfirmed} />
           <label htmlFor='age'>I am 18 years old</label>
           <br/>
           <button type='submit'>Buy</button>
