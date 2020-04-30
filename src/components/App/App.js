@@ -1,5 +1,6 @@
 import React from 'react';
 import Form from '../Form/Form';
+import styles from './App.scss';
 
 //const PositiveMessage = () => <p>You are allowed to watch the movie.</p>
 
@@ -16,10 +17,12 @@ const ValidationMessage = (props) => {
 class App extends React.Component {
 
   state = {
-    isConfirmed: false,
-    isFormSubmitted: false
+    isConfirmed: false,        //Checkobx
+    isFormSubmitted: false,    //Checkobx
+    availableProducts: 7,      //Cart
+    shoppingCart: 1            //Cart
   }
-
+  //Checkbox
   handleCheckboxChange = () => {
     this.setState({
       isConfirmed: !this.state.isConfirmed,
@@ -46,20 +49,44 @@ class App extends React.Component {
     } else {return null}
   }
 
+  //Cart
+  handleRemoveFromCart = () => {
+    this.setState({
+      shoppingCart: this.state.shoppingCart -1,
+    })
+  }
+
+  handleAddToCart = () => {
+    this.setState({
+      shoppingCart: this.state.shoppingCart +1,
+    })
+  }
+
   render() {
     const {isConfirmed} = this.state
     console.log(isConfirmed);
 
     return (
-      <div>
-        <h1>Buy the ticket!</h1>
-        <Form 
-        change={this.handleCheckboxChange} 
-        submit={this.handleFormSubmit} 
-        checked={this.isConfirmed}
-        />
-        {this.displayMessage()} 
-      </div>
+      <>
+        <div>
+          <h1>Buy the ticket!</h1>
+          <Form 
+          change={this.handleCheckboxChange} 
+          submit={this.handleFormSubmit} 
+          checked={this.isConfirmed}
+          />
+          {this.displayMessage()} 
+        </div>
+        <div className={styles.container}>
+          <button className={styles.btn} 
+                  disabled={this.state.shoppingCart ? false : true} 
+                  onClick={this.handleRemoveFromCart}>-</button>
+          <span>{this.state.shoppingCart}</span>
+          <button className={styles.btn} 
+                  disabled={this.state.shoppingCart === this.state.availableProducts ? true : false} 
+                  onClick={this.handleAddToCart}>+</button>
+        </div>
+      </>
     )
   }
 }
