@@ -62,6 +62,14 @@ class App extends React.Component {
     })
   }
 
+  handleBuy = () => {
+    //console.log('Bought');
+    this.setState({
+      availableProducts: this.state.availableProducts - this.state.shoppingCart,
+      shoppingCart: 0
+    })
+  }
+
   render() {
     const {isConfirmed} = this.state
     console.log(isConfirmed);
@@ -85,6 +93,7 @@ class App extends React.Component {
           <button className={styles.btn} 
                   disabled={this.state.shoppingCart === this.state.availableProducts ? true : false} 
                   onClick={this.handleAddToCart}>+</button>
+          {this.state.shoppingCart > 0 && <button className={styles.btn} onClick={this.handleBuy}>Buy</button>}
         </div>
       </>
     )
