@@ -71,8 +71,9 @@ class App extends React.Component {
   }
 
   render() {
-    const {isConfirmed} = this.state
+    const {isConfirmed} = this.state;
     console.log(isConfirmed);
+    const style = this.state.shoppingCart === 0 ? {opacity: 0.3} : {};
 
     return (
       <>
@@ -89,7 +90,9 @@ class App extends React.Component {
           <button className={styles.btn} 
                   disabled={this.state.shoppingCart ? false : true} 
                   onClick={this.handleRemoveFromCart}>-</button>
-          <span>{this.state.shoppingCart}</span>
+
+          <span style={style}>{this.state.shoppingCart}</span>
+
           <button className={styles.btn} 
                   disabled={this.state.shoppingCart === this.state.availableProducts ? true : false} 
                   onClick={this.handleAddToCart}>+</button>
