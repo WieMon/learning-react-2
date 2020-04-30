@@ -73,7 +73,8 @@ class App extends React.Component {
   render() {
     const {isConfirmed} = this.state;
     console.log(isConfirmed);
-    const style = this.state.shoppingCart === 0 ? {opacity: 0.3} : {};
+    const {shoppingCart, availableProducts} = this.state;
+    const style = shoppingCart === 0 ? {opacity: 0.3} : {};
 
     return (
       <>
@@ -88,15 +89,15 @@ class App extends React.Component {
         </div>
         <div className={styles.container}>
           <button className={styles.btn} 
-                  disabled={this.state.shoppingCart ? false : true} 
+                  disabled={shoppingCart ? false : true} 
                   onClick={this.handleRemoveFromCart}>-</button>
 
-          <span style={style}>{this.state.shoppingCart}</span>
+          <span style={style}>{shoppingCart}</span>
 
           <button className={styles.btn} 
-                  disabled={this.state.shoppingCart === this.state.availableProducts ? true : false} 
+                  disabled={shoppingCart === availableProducts ? true : false} 
                   onClick={this.handleAddToCart}>+</button>
-          {this.state.shoppingCart > 0 && <button className={styles.btn} onClick={this.handleBuy}>Buy</button>}
+          {shoppingCart > 0 && <button className={styles.btn} onClick={this.handleBuy}>Buy</button>}
         </div>
       </>
     )
