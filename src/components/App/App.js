@@ -1,6 +1,7 @@
 import React from 'react';
 import Form from '../Form/Form';
 import styles from './App.scss';
+import Item from '../Item/Item';
 
 //const PositiveMessage = () => <p>You are allowed to watch the movie.</p>
 
@@ -76,6 +77,7 @@ class App extends React.Component {
     console.log(isConfirmed);
     const {shoppingCart, availableProducts} = this.state;
     const style = shoppingCart === 0 ? {opacity: 0.3} : {};
+    const Items = this.state.items.map(item => <Item key={item} content={item} />);
 
     return (
       <>
@@ -102,7 +104,7 @@ class App extends React.Component {
         </div>
         <div>
           <ul>
-            {this.state.items.map(item => <li key={item}>{`fruit: ${item}`}</li>)}
+            {Items}
           </ul>
         </div>
       </>
