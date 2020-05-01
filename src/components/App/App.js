@@ -20,7 +20,8 @@ class App extends React.Component {
     isConfirmed: false,        //Checkobx
     isFormSubmitted: false,    //Checkobx
     availableProducts: 7,      //Cart
-    shoppingCart: 1            //Cart
+    shoppingCart: 1,            //Cart
+    items: ['apple', 'plum', 'pear']  //Array
   }
   //Checkbox
   handleCheckboxChange = () => {
@@ -98,6 +99,11 @@ class App extends React.Component {
                   disabled={shoppingCart === availableProducts ? true : false} 
                   onClick={this.handleAddToCart}>+</button>
           {shoppingCart > 0 && <button className={styles.btn} onClick={this.handleBuy}>Buy</button>}
+        </div>
+        <div>
+          <ul>
+            {this.state.items.map(item => <li key={item}>{`fruit: ${item}`}</li>)}
+          </ul>
         </div>
       </>
     )
