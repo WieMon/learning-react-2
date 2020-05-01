@@ -2,6 +2,9 @@ import React from 'react';
 import Form from '../Form/Form';
 import styles from './App.scss';
 import Item from '../Item/Item';
+import Header from '../Header/Header';
+import ListItems from '../ListItems/ListItems';
+//import Items from '../Items/Items';
 
 //const PositiveMessage = () => <p>You are allowed to watch the movie.</p>
 
@@ -22,8 +25,17 @@ class App extends React.Component {
     isFormSubmitted: false,    //Checkobx
     availableProducts: 7,      //Cart
     shoppingCart: 1,            //Cart
-    items: ['apple', 'plum', 'pear']  //Array
+    items: ['apple', 'plum', 'pear'],  //Array
+    itemsMenu: [
+      { id: 1, name: "herbata", active: true },
+      { id: 2, name: "ziemniaki", active: false },
+      { id: 3, name: "kasza", active: false },
+      { id: 4, name: "zupa wodna", active: true },
+      { id: 5, name: "wrzątek", active: false },
+      { id: 6, name: "chleb", active: false },
+    ]
   }
+  
   //Checkbox
   handleCheckboxChange = () => {
     this.setState({
@@ -71,6 +83,9 @@ class App extends React.Component {
       shoppingCart: 0
     })
   }
+  userList = () => {
+
+  }
 
   render() {
     const {isConfirmed} = this.state;
@@ -78,7 +93,7 @@ class App extends React.Component {
     const {shoppingCart, availableProducts} = this.state;
     const style = shoppingCart === 0 ? {opacity: 0.3} : {};
     const Items = this.state.items.map(item => <Item key={item} content={item} />);
-
+    
     return (
       <>
         <div>
@@ -90,26 +105,31 @@ class App extends React.Component {
           />
           {this.displayMessage()} 
         </div>
+
         <div className={styles.container}>
           <button className={styles.btn} 
                   disabled={shoppingCart ? false : true} 
                   onClick={this.handleRemoveFromCart}>-</button>
-
           <span style={style}>{shoppingCart}</span>
-
           <button className={styles.btn} 
                   disabled={shoppingCart === availableProducts ? true : false} 
                   onClick={this.handleAddToCart}>+</button>
           {shoppingCart > 0 && <button className={styles.btn} onClick={this.handleBuy}>Buy</button>}
         </div>
+
         <div>
-          <ul>
-            {Items}
-          </ul>
-        </div>
+          {Items}
+         </div>
+
+         <div className={styles.containerMenu}>
+           <Header items={this.state.itemsMenu} />
+           <ListItems />
+         </div>
       </>
     )
   }
 }
 
 export default App;
+
+
