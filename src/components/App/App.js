@@ -35,6 +35,18 @@ class App extends React.Component {
       { id: 6, name: "chleb", active: false },
     ]
   }
+
+  handleChangeStatus = (id) => {
+    const itemsMenu = this.state.itemsMenu.map(item => {
+      if (id === item.id) {
+        item.active = !item.active
+      }
+      return item
+    })
+    this.setState({
+      itemsMenu: itemsMenu
+    })
+  }
   
   //Checkbox
   handleCheckboxChange = () => {
@@ -77,8 +89,7 @@ class App extends React.Component {
   }
 
   handleBuy = () => {
-    //console.log('Bought');
-    this.setState({
+      this.setState({
       availableProducts: this.state.availableProducts - this.state.shoppingCart,
       shoppingCart: 0
     })
@@ -89,7 +100,6 @@ class App extends React.Component {
 
   render() {
     const {isConfirmed} = this.state;
-    console.log(isConfirmed);
     const {shoppingCart, availableProducts} = this.state;
     const style = shoppingCart === 0 ? {opacity: 0.3} : {};
     const Items = this.state.items.map(item => <Item key={item} content={item} />);
@@ -123,7 +133,7 @@ class App extends React.Component {
 
          <div className={styles.containerMenu}>
            <Header items={this.state.itemsMenu} />
-           <ListItems items={this.state.itemsMenu}/>
+           <ListItems items={this.state.itemsMenu} changeStatus={this.handleChangeStatus}/>
          </div>
       </>
     )

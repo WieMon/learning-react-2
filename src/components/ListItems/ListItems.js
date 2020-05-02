@@ -6,12 +6,13 @@ const ListItems = (props) => {
   const items = props.items.map(item => (
     <Items 
       key={item.id} 
+      id={item.id}
       name={item.name}
       active={item.active}
+      changeStatus={props.changeStatus}
     />
   ))
 
-  console.log('items: ', items);
   return (
     <div className={styles.list}> 
       <h2>Your order:</h2>
@@ -22,4 +23,5 @@ const ListItems = (props) => {
    
   )
 }
+
 export default ListItems; 
