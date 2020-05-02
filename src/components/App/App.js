@@ -26,16 +26,21 @@ class App extends React.Component {
     availableProducts: 7,      //Cart
     shoppingCart: 1,            //Cart
     items: ['apple', 'plum', 'pear'],  //Array
-    itemsMenu: [
+    itemsMenu: [                                   //Menu
       { id: 1, name: "herbata", active: true },
       { id: 2, name: "ziemniaki", active: false },
       { id: 3, name: "kasza", active: false },
       { id: 4, name: "zupa wodna", active: true },
       { id: 5, name: "wrzątek", active: false },
       { id: 6, name: "chleb", active: false },
-    ]
+    ],
+    city: 'London',   //Form
+    text: '',
+    isLoved: true,
+    number: '2'
   }
 
+  //Menu
   handleChangeStatus = (id) => {
     const itemsMenu = this.state.itemsMenu.map(item => {
       if (id === item.id) {
@@ -98,6 +103,31 @@ class App extends React.Component {
 
   }
 
+    //Form
+    handleCityChange = e => {
+      this.setState({
+        city: e.target.value,
+      })
+    }
+
+    handleTextChange = e => {
+      this.setState({
+        text: e.target.value,
+      })
+    }
+
+    handleIsLovedChanged = e => {
+      this.setState({
+        isLoved: e.target.checked,
+      })
+    }
+
+    handleVisitsNumberChange(e) {
+      this.setState({
+        number: e.target.value,
+      })
+    }
+
   render() {
     const {isConfirmed} = this.state;
     const {shoppingCart, availableProducts} = this.state;
@@ -134,6 +164,30 @@ class App extends React.Component {
          <div className={styles.containerMenu}>
            <Header items={this.state.itemsMenu} />
            <ListItems items={this.state.itemsMenu} changeStatus={this.handleChangeStatus}/>
+         </div>
+
+         <div>
+           <label>Provide city </label>
+            <input value={this.state.city} 
+                  onChange={this.handleCityChange} 
+                  type='text' 
+            />
+          <br />
+          <label>Provide information on this city </label>
+            <textarea value={this.state.text} onChange={this.handleTextChange}></textarea>
+          <br />
+          <label>Do you like this city?</label>
+            <input type='checkbox' checked={this.state.isLoved} onChange={this.handleIsLovedChanged}/>
+          <label>
+            How many times have you visited this city?
+            <select value={this.state.number} onChange={this.handleVisitsNumberChange.bind(this)}>
+              <option value='0'>0</option>
+              <option value='1'>1</option>
+              <option value='2'>2</option>
+              <option value='3'>3</option>
+              <option value='more'>more</option>
+            </select>
+          </label>
          </div>
       </>
     )
