@@ -123,7 +123,7 @@ class App extends React.Component {
 
          <div className={styles.containerMenu}>
            <Header items={this.state.itemsMenu} />
-           <ListItems />
+           <ListItems items={this.state.itemsMenu}/>
          </div>
       </>
     )
