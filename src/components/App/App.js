@@ -4,6 +4,9 @@ import styles from './App.scss';
 import Item from '../Item/Item';
 import Header from '../Header/Header';
 import ListItems from '../ListItems/ListItems';
+//import Dollars from '../Dollars/Dollars';
+//import Euros from '../Euros/Euros';
+import Cash from '../Cash/Cash';
 //import Items from '../Items/Items';
 
 //const PositiveMessage = () => <p>You are allowed to watch the movie.</p>
@@ -35,9 +38,13 @@ class App extends React.Component {
       { id: 6, name: "chleb", active: false },
     ],
     city: 'London',   //Form
-    text: '',
-    isLoved: true,
-    number: '2'
+    text: '',         //Form
+    isLoved: true,    //Form
+    number: '2',      //Form
+    amount: '',       //Currency Converter
+    ratioDollar: 3.6,  //Currency Converter
+    ratioEuro: 4.2     //Currency Converter
+
   }
 
   //Menu
@@ -103,7 +110,7 @@ class App extends React.Component {
 
   }
 
-    //Form
+  //Form
     
   handleChange = e => {
     console.log(e.target.type);
@@ -118,6 +125,12 @@ class App extends React.Component {
     }
   }
 
+  //Currency Converter
+  handleChange = e => {
+    this.setState({
+      amount: e.target.value,
+    })
+  }
  
 
   render() {
@@ -125,6 +138,7 @@ class App extends React.Component {
     const {shoppingCart, availableProducts} = this.state;
     const style = shoppingCart === 0 ? {opacity: 0.3} : {};
     const Items = this.state.items.map(item => <Item key={item} content={item} />);
+    const{amount, ratioDollar, ratioEuro} = this.state   //Currency Converter
     
     return (
       <>
@@ -190,6 +204,17 @@ class App extends React.Component {
               <option value='more'>more</option>
             </select>
           </label>
+          <div className={styles.containerMenu}>
+            <label>
+              <input type='number' 
+                     value={amount} 
+                     onChange={this.handleChange}/>
+              {/*<Dollars cash={amount} ratio={ratioDollar} />
+              <Euros cash={amount} ratio={ratioEuro}/>*/}
+              <Cash cash={amount} ratio={ratioDollar} title='Dollars: ' />
+              <Cash cash={amount} ratio={ratioEuro} title='Euro: ' />
+            </label>
+          </div>
          </div>
       </>
     )
