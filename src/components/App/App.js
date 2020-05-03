@@ -42,32 +42,47 @@ class App extends React.Component {
     isLoved: true,    //Form
     number: '2',      //Form
     amount: '',       //Currency Converter
+    product: 'electricity',  //Currency Converter
     //ratioDollar: 3.6,  //Currency Converter
     //ratioEuro: 4.2     //Currency Converter
 
   }
 
   //Currency Converter
-  currencies = [
-    {
-      id: 1,
-      name: 'dollar',
-      ratio: 3.6,
-      title: 'Price in dollars:'
-    },
-    {
-      id: 2,
-      name: 'euro',
-      ratio: 4.1,
-      title: 'Price in euro:'
-    },
-    {
-      id: 3,
-      name: 'pound',
-      ratio: 4.55,
-      title: 'Price in pounds:'
-    },
-  ]
+  static defaultProps ={
+    currencies: [
+      {
+        id: 0,
+        name: 'zloty',
+        ratio: 1,
+        title: 'Price in zloties:'
+      },
+        {
+          id: 1,
+          name: 'dollar',
+          ratio: 3.6,
+          title: 'Price in dollars:'
+        },
+        {
+          id: 2,
+          name: 'euro',
+          ratio: 4.1,
+          title: 'Price in euro:'
+        },
+        {
+          id: 3,
+          name: 'pound',
+          ratio: 4.55,
+          title: 'Price in pounds:'
+        },
+    ],
+    prices: {
+      electricity: .51,
+      gas: 4.76,
+      oranges: 3.79
+    }
+  }
+  
 
   //Menu
   handleChangeStatus = (id) => {
@@ -154,21 +169,44 @@ class App extends React.Component {
     })
   }
  
+  handleSelect = e => {
+    this.setState({
+      product: e.target.value,
+      amount: ''
+    })
+  }
+
+  insertSuffix(select) {
+    if(select === 'electricity')
+      return <em>kWh</em>
+      else if(select === 'gas')
+        return <em>liters</em>
+        else if(select === 'oranges')
+          return <em>kilos</em>
+          else return null
+  } 
+
+  selectPrice(select) {
+    const price = this.props.prices[select]
+    return price
+  }
 
   render() {
     const {isConfirmed} = this.state;
     const {shoppingCart, availableProducts} = this.state;
     const style = shoppingCart === 0 ? {opacity: 0.3} : {};
     const Items = this.state.items.map(item => <Item key={item} content={item} />);
-    const{amount, ratioDollar, ratioEuro} = this.state   //Currency Converter
-    const calculators = this.currencies.map(currency => (
+    const{amount, product, ratioDollar, ratioEuro} = this.state   //Currency Converter
+    const price = this.selectPrice(product)
+    const calculators = this.props.currencies.map(currency => (
       <Cash key={currency.id} 
             ratio={currency.ratio} 
             title={currency.title} 
             cash={amount} 
+            price={price}
       />
     ))
-
+    
     return (
       <>
         <div>
@@ -234,6 +272,14 @@ class App extends React.Component {
             </select>
           </label>
           <div className={styles.containerMenu}>
+            <label>Select the product: 
+              <select value={product} onChange={this.handleSelect}>
+                <option value='electricity'>Electricity</option>
+                <option value='gas'>Gas</option>
+                <option value='oranges'>Orange</option>
+              </select>
+            </label>
+            <br />
             <label>
               <input type='number' 
                      value={amount} 
@@ -242,6 +288,7 @@ class App extends React.Component {
               <Euros cash={amount} ratio={ratioEuro}/>
               <Cash cash={amount} ratio={ratioDollar} title='Dollars: ' />
               <Cash cash={amount} ratio={ratioEuro} title='Euro: ' />*/}
+              {this.insertSuffix(this.state.product)}
               {calculators}
             </label>
           </div>
