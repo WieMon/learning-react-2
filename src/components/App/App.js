@@ -148,7 +148,6 @@ class App extends React.Component {
   }
 
   //Form
-    
   handleChange = e => {
     console.log(e.target.type);
     if (e.target.type === "checkbox") {
@@ -214,7 +213,7 @@ class App extends React.Component {
           <Form 
           change={this.handleCheckboxChange} 
           submit={this.handleFormSubmit} 
-          checked={this.isConfirmed}
+          checked={isConfirmed}
           />
           {this.displayMessage()} 
         </div>
