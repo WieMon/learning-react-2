@@ -48,7 +48,9 @@ class App extends React.Component {
     number1: 0,
     number2: 0,
     number3: 0,
-    number4: 0
+    number4: 0,
+    result: 1,
+    ratio: 2
   }
 
   //Currency Converter
@@ -248,6 +250,27 @@ class App extends React.Component {
     })
   }
 
+  //Lifecycle of conponents
+  handleMultiplication = () => {
+    this.setState((state) => (
+      {
+        result: state.result * state.ratio
+      }))
+    // console.log(this.state);
+  }
+
+  componentDidUpdate() {
+    if (this.state.result > 1000 && this.state.ratio === 2) {
+      this.setState({
+        ratio: 0.5
+      })
+    } else if (this.state.result < 1 && this.state.ratio === .5) {
+      this.setState({
+        ratio: 2
+      })
+    }
+  }
+
   render() {
     const {isConfirmed} = this.state;
     const {shoppingCart, availableProducts} = this.state;
@@ -364,6 +387,12 @@ class App extends React.Component {
             <br />
             <button onClick={this.handleClick4}>Increase by 3</button>
             <h2>{this.state.number4}</h2>
+          </div>
+
+          <div>
+          <p>Kalkulator mnoży przez dwa, jeśli suma jest mniejsza niż 1000. Po przekroczeniu 1000 kalkualtor mnoży przez 0.5 aż osiągnie sumę mniejszą niż jeden. Wtedy ponownie zaczyna mnozyć przez dwa.</p>
+        <button onClick={this.handleMultiplication}>{`Multiply by ${this.state.ratio}`}</button>
+        <h1>Result: {this.state.result}</h1>
           </div>
          </div>
       </>
