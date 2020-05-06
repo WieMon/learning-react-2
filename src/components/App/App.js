@@ -45,7 +45,10 @@ class App extends React.Component {
     product: 'electricity',  //Currency Converter
     //ratioDollar: 3.6,  //Currency Converter
     //ratioEuro: 4.2     //Currency Converter
-
+    number1: 0,
+    number2: 0,
+    number3: 0,
+    number4: 0
   }
 
   //Currency Converter
@@ -190,6 +193,61 @@ class App extends React.Component {
     return price
   }
 
+  //Asynchronicity and merging
+  handleClick1 = () => {
+    this.setState({
+      number1: this.state.number1 + 1,
+    })
+    console.log('number1 in handleClick; ', this.state.number1);
+  }
+
+  handleClick2 = () => {
+    this.setState({
+      number2: this.state.number2 + 1,
+    })
+    this.setState({
+      number2: this.state.number2 + 1,
+    })
+    this.setState({
+      number12: this.state.number2 + 1,
+    })
+    console.log('number2 in handleClick; ', this.state.number2);
+  }
+
+  handleClick3 = () => {
+    this.setState(() => ({
+      number3: this.state.number3 + 1,
+    }))
+    this.setState(() => ({
+      number3: this.state.number3 + 1,
+    }))
+    this.setState(() => ({
+      number3: this.state.number3 + 1,
+    }))
+    console.log('number2 in handleClick; ', this.state.number2);
+  }
+
+  handleClick4 = () => {
+    this.setState((state) => {
+      console.log('numer 4 in handleCLick4: ', state);
+      return {
+        number4: this.state.number4 + 1,
+      }
+    })
+    this.setState((state) => {
+      console.log('numer 4 in handleCLick4: ', state);
+      return {
+        number4: this.state.number4 + 1,
+      }
+    })
+    this.setState((state) => {
+      console.log('numer 4 in handleCLick4: ', state);
+      return {
+        number4: this.state.number4 + 1,
+      }
+    })
+  }
+
   render() {
     const {isConfirmed} = this.state;
     const {shoppingCart, availableProducts} = this.state;
@@ -205,7 +263,9 @@ class App extends React.Component {
             price={price}
       />
     ))
-    
+    console.log('number1 in render; ', this.state.number1);
+    console.log('number2 in render; ', this.state.number2);
+    console.log('number3 in render; ', this.state.number3);
     return (
       <>
         <div>
@@ -290,6 +350,20 @@ class App extends React.Component {
               {this.insertSuffix(this.state.product)}
               {calculators}
             </label>
+          </div>
+
+          <div>
+            <button onClick={this.handleClick1}>Increase by 1</button>
+            <h2>{this.state.number1}</h2>
+            <br />
+            <button onClick={this.handleClick2}>Increase by 3</button>
+            <h2>{this.state.number2}</h2>
+            <br />
+            <button onClick={this.handleClick3}>Increase by 3</button>
+            <h2>{this.state.number3}</h2>
+            <br />
+            <button onClick={this.handleClick4}>Increase by 3</button>
+            <h2>{this.state.number4}</h2>
           </div>
          </div>
       </>
