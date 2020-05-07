@@ -8,6 +8,8 @@ import ListItems from '../ListItems/ListItems';
 //import Euros from '../Euros/Euros';
 import Cash from '../Cash/Cash';
 //import Items from '../Items/Items';
+import Clock from '../Clock/Clock';
+
 
 //const PositiveMessage = () => <p>You are allowed to watch the movie.</p>
 
@@ -393,6 +395,10 @@ class App extends React.Component {
           <p>Kalkulator mnoży przez dwa, jeśli suma jest mniejsza niż 1000. Po przekroczeniu 1000 kalkualtor mnoży przez 0.5 aż osiągnie sumę mniejszą niż jeden. Wtedy ponownie zaczyna mnozyć przez dwa.</p>
         <button onClick={this.handleMultiplication}>{`Multiply by ${this.state.ratio}`}</button>
         <h1>Result: {this.state.result}</h1>
+          </div>
+
+          <div>
+           <Clock />
           </div>
          </div>
       </>
