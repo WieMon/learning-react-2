@@ -9,7 +9,7 @@ import ListItems from '../ListItems/ListItems';
 import Cash from '../Cash/Cash';
 //import Items from '../Items/Items';
 import Clock from '../Clock/Clock';
-
+import SwitchButton from '../SwitchButton/SwitchButton';
 
 //const PositiveMessage = () => <p>You are allowed to watch the movie.</p>
 
@@ -52,7 +52,8 @@ class App extends React.Component {
     number3: 0,
     number4: 0,
     result: 1,
-    ratio: 2
+    ratio: 2,
+    active: true
   }
 
   //Currency Converter
@@ -273,6 +274,15 @@ class App extends React.Component {
     }
   }
 
+  //Clock
+
+  handleClick = () => {
+    this.setState(state => ({
+      active: !state.active
+    }))
+  }
+
+
   render() {
     const {isConfirmed} = this.state;
     const {shoppingCart, availableProducts} = this.state;
@@ -398,7 +408,8 @@ class App extends React.Component {
           </div>
 
           <div>
-           <Clock />
+          <SwitchButton active={this.state.active} click={this.handleClick} />
+          {this.state.active && <Clock />}
           </div>
          </div>
       </>

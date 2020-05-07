@@ -34,7 +34,7 @@ class Clock extends React.Component {
 
   render() {
     const { hours, minutes, seconds } = this.state.time
-
+    console.log('interval: ', this.interval);
     return (
       <div>
         {hours} : {minutes > 9 ? minutes : `0${minutes}`} : {seconds > 9 ? seconds : `0${seconds}`}
