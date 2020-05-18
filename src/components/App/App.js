@@ -10,7 +10,7 @@ import Cash from '../Cash/Cash';
 //import Items from '../Items/Items';
 import Clock from '../Clock/Clock';
 import SwitchButton from '../SwitchButton/SwitchButton';
-
+import Text from '../Text/Text';
 //const PositiveMessage = () => <p>You are allowed to watch the movie.</p>
 
 //const NegativeMessage = () => <p>You are not allowed to watch the movie.</p>
@@ -53,7 +53,8 @@ class App extends React.Component {
     number4: 0,
     result: 1,
     ratio: 2,
-    active: true
+    active: true,
+    underline: false //css
   }
 
   //Currency Converter
@@ -301,6 +302,10 @@ class App extends React.Component {
     console.log('number1 in render; ', this.state.number1);
     console.log('number2 in render; ', this.state.number2);
     console.log('number3 in render; ', this.state.number3);
+    const text = 'hello on the page' //css
+    let classes = ''; //css
+    if(this.state.underline) classes+=' line' //css
+    if(text.length > 10) classes += 'big' //css
     return (
       <>
         <div>
@@ -411,7 +416,12 @@ class App extends React.Component {
           <SwitchButton active={this.state.active} click={this.handleClick} />
           {this.state.active && <Clock />}
           </div>
-         </div>
+        </div>
+
+        <div className='app' onClick = {() => this.setState({underline: !this.state.underline})}>
+          <h1 className={classes}> Hello </h1>
+              <Text />
+        </div>
       </>
     )
   }
