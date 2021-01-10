@@ -11,11 +11,18 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "elliptic": "^6.5.3",
+    "http-proxy": "^1.18.1",
     "ini": "^2.0.0",
+    "lodash": "^4.17.20",
+    "node-forge": "^0.10.0",
     "prop-types": "^15.7.2",
     "react": "^16.7.0",
     "react-dom": "^16.7.0",
-    "react-html-parser": "^2.0.2"
+    "react-html-parser": "^2.0.2",
+    "serialize-javascript": "^5.0.1",
+    "websocket-extensions": "^0.1.4",
+    "yargs-parser": "^20.2.4"
   },
   "devDependencies": {
     "@babel/core": "^7.4.3",
